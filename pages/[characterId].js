@@ -1,11 +1,11 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useRouter } from "next/router";
 import React from "react";
 import useCharacterHooks from "./useCharacterHooks";
-import { useRouter } from "next/router";
 
 const GET_CHARACTER = gql`
   query GetCharater($id: ID!) {
-    character(id: 2) {
+    character(id: $id) {
       name
       id
       image
