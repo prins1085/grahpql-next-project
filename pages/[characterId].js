@@ -1,7 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import React from "react";
-import useCharacterHooks from "./useCharacterHooks";
 
 const GET_CHARACTER = gql`
   query GetCharater($id: ID!) {
@@ -16,6 +15,18 @@ const GET_CHARACTER = gql`
     }
   }
 `;
+
+const useCharacterHooks = (id) => {
+    const { data, error, loading } = useQuery(GET_CHARACTER, {
+        variables: { id },
+      });
+  return {
+    data,
+    loading,
+    error,
+  };
+}
+
 
 const characterId = () => {
     const router = useRouter();
