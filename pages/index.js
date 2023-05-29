@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import Link from "next/link";
 import React from "react";
 
 const GET_CHARACTERS = gql`
@@ -25,10 +26,12 @@ const CharacterList = () => {
   return <div className="flex flex-wrap justify-evenly p-4">
     {data.characters.results.map((character) => {
       return (
+        <Link href={`${character.id}`} key={`${character.id}`}>
         <div className="relative">
           <img src={character.image} alt="Charater_image" />
           <div className="absolute top-[90%] text-black bg-blue-200 px-2 rounded-md font-extrabold">{character.name}</div>
         </div>
+        </Link>
       )
     })}
   </div>;
